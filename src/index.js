@@ -48,8 +48,20 @@ function decode(expr) {
       exprArr.push(expr.substr(i, 10).substr(tmpNumChar));
     }
   
+    let tmpWord = [];
     for(word of exprArr){
-      exprDotDash.push(word.replaceAll('10', '.').replaceAll('11', '-').replaceAll('*', ' '));
+      // exprDotDash.push(word.replaceAll('10', '.').replaceAll('11', '-').replaceAll('*', ' '));
+      tmpWord = [];
+      for(let i = 0; i < word.length; i+=2){
+        if(word[i] === '1' && word[i+1] === '0'){
+          tmpWord.push('.'); 
+        } else if(word[i] === '1' && word[i+1] === '1'){
+          tmpWord.push('-'); 
+        } else if(word[i] === '*'){
+          tmpWord.push(' '); 
+        }
+      }
+      exprDotDash.push((tmpWord.join('')))
     }
   
     for(word of exprDotDash){
